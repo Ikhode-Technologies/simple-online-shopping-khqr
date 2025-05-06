@@ -1,61 +1,210 @@
-# Vuepabase
+# Simple-OS (Vuepabase)
 
-This is a project I created to show how Supabase auth (email and 3rd party GitHub) can be set up concretely with a new Vue 3 app. This integrates Supabase with Vue 3, Pinia, Vue-router 4, TailwindCSS, Vitest, Cypress and more. Please see package.json for more info.
+A modern Vue 3 application with Supabase authentication integration, featuring email, password, and GitHub authentication flows. This project demonstrates how to effectively integrate Supabase with Vue 3, Pinia, Vue-router 4, TailwindCSS, and includes testing with Vitest and Cypress.
 
-If you want to a quick start to your next Vue 3 + Supabase app, please feel free to use this template. Below I will guide you through how to set the app up locally, and the configuration you need to do in Supabase.
+## Features
 
-## Supabase Setup
+- 🔐 Complete authentication system with Supabase
+- 📧 Email & Password authentication
+- 🔑 GitHub OAuth integration
+- 💱 KHQR payment integration
+- 🧩 Vue 3 Composition API
+- 🏪 Pinia for state management
+- 🛣️ Vue Router for navigation
+- 🎨 TailwindCSS for styling
+- 🧪 Testing with Vitest and Cypress
 
-Head on over to https://supabase.com/ and create your app. Choose your Project name, password, region and pricing plan as appropriate. This app will work just fine on free tier.
+## Prerequisites
 
-Once the app setup is finished, head over to Authentication - Settings.
-You'll want to add both your Production URL and localhost URLs to the Site URL / Additional Redirect URLs columns. Along with the base URL, we need to add redirect URLs for our password reset flow, and 3rd party auth flow. These are `/resetpassword` and `/callback` respectively.
+- Node.js (v16 or later recommended)
+- npm or yarn
+- Git
+- Supabase account
 
-All in all your 'Site URL' and 'Additional Redirect URLs' should look something like this (replacing the prod URL as appropriate)
+## Installation
 
-| Field  | Value |
-| ------------- | ------------- |
-| Site URL  | `https://vuepabase.netlify.app/`  |
-| Additional Redirect URLs  | `http://localhost:3000/resetpassword`, `https://vuepabase.netlify.app/resetpassword`, `http://localhost:3000`, `http://localhost:3000/callback`, `https://vuepabase.netlify.app/callback`  |
+1. Clone the repository
+   ```bash
+   git clone https://github.com/MyKhode/ihub.git
+   cd ihub
+   ```
 
-Once you save this, the email-password authentication flow should work properly after you've set the Vue app up locally.
+2. Install dependencies
+   ```bash
+   npm install
+   ```
 
-### GitHub Auth
+3. Create a `.env` file in the root directory based on the example below:
+   ```
+   VITE_SUPABASE_URL=your_supabase_url
+   VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+   ```
 
-You can additionally add GitHub auth to the app. First you'll need to go to GitHub and set up some app credentials.
+## Development Setup
 
-Supabase have a great guide on how to do this already so you can follow that here: https://supabase.com/docs/guides/auth/auth-github
+### Supabase Configuration
 
-After you've got them, on Supabase - Settings - Auth, just enable GitHub as a 3rd party provider and enter the details you generated.
+1. Head over to [Supabase](https://supabase.com/) and create a new project
+2. Choose your Project name, password, region, and pricing plan (free tier works fine)
+3. Once the project is created, navigate to **Authentication > Settings**
+4. Configure Site URL and Additional Redirect URLs:
 
-Your Supabase set up should now be complete and you can run the app locally.
+   | Field                    | Value                                                                                                                                                                                              |
+   |--------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+   | Site URL                 | `https://your-production-url.com/`                                                                                                                                                                 |
+   | Additional Redirect URLs | `http://localhost:3000/resetpassword`, `https://your-production-url.com/resetpassword`, `http://localhost:3000`, `http://localhost:3000/callback`, `https://your-production-url.com/callback` |
 
-## Setup Vue app
+5. Save your changes
 
-```sh
-npm install
-```
+### GitHub OAuth Setup (Optional)
 
-### Compile and Hot-Reload for Development
+1. Go to [GitHub Developer Settings](https://github.com/settings/developers)
+2. Create a new OAuth App
+3. Set the Authorization callback URL to your Supabase Auth callback URL (found in Supabase Dashboard)
+4. Copy the Client ID and Client Secret
+5. In Supabase Dashboard, go to **Authentication > Providers**
+6. Enable GitHub provider and enter your Client ID and Client Secret
+7. Save your changes
 
-```sh
+### KHQR Configuration
+
+The KHQR (Khmer QR Code) payment integration requires specific setup:
+
+1. Import the KHQR module in your component:
+   ```javascript
+   import { khqr } from 'ts-khqr';
+   ```
+
+2. Configure KHQR parameters in your application:
+   ```javascript
+   const qrData = khqr.generate({
+     merchantName: 'YOUR_MERCHANT_NAME',
+     merchantID: 'YOUR_MERCHANT_ID',
+     merchantCity: 'YOUR_CITY',
+     amount: transactionAmount,
+     currency: 'USD', // or 'KHR' for Cambodian Riel
+     acquiringBank: 'YOUR_ACQUIRING_BANK',
+     billNumber: 'UNIQUE_BILL_ID'
+   });
+   ```
+
+3. Generate a QR code using the qrcode library:
+   ```javascript
+   import QRCode from 'qrcode';
+   
+   // Generate QR code in component
+   QRCode.toCanvas(document.getElementById('qr-canvas'), qrData, {
+     width: 250,
+     margin: 2
+   });
+   ```
+
+4. Set up payment listener in your Pinia store or component to handle transaction callbacks.
+
+## Running the Application
+
+### Development Mode
+
+```bash
 npm run dev
 ```
 
-Your app should now be running at localhost:3000
+This will start the development server at `http://localhost:3000`
 
-### Type-Check, Compile and Minify for Production
+### Build for Production
 
-```sh
+```bash
 npm run build
 ```
 
-### Preview Built App
+### Preview Production Build
 
-```sh
+```bash
 npm run preview
 ```
 
-### Recommended IDE Setup
+This will serve the production build at `http://localhost:5050`
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar) (and disable Vetur).
+## Testing
+
+### Unit Tests with Vitest
+
+```bash
+npm run test:vitest
+```
+
+### Component Tests with Cypress
+
+```bash
+npm run test:unit
+```
+
+### E2E Tests with Cypress
+
+```bash
+npm run test:e2e
+```
+
+## API Endpoints
+
+If you're using the integrated server functionality:
+
+```bash
+npm run serve
+```
+
+This will start the server defined in `server.js`
+
+## Project Structure
+
+```
+├── public/               # Static assets
+├── src/
+│   ├── assets/           # App assets (processed by Vite)
+│   ├── components/       # Vue components
+│   ├── composables/      # Vue composables
+│   ├── layouts/          # Page layouts
+│   ├── router/           # Vue Router configuration
+│   ├── stores/           # Pinia stores
+│   ├── services/         # API services
+│   │   └── supabase.ts   # Supabase client configuration
+│   ├── types/            # TypeScript type definitions
+│   ├── utils/            # Utility functions
+│   ├── views/            # Page components
+│   ├── App.vue           # Root component
+│   └── main.ts           # Application entry point
+├── .env                  # Environment variables
+├── .env.example          # Example environment variables
+├── cypress/              # Cypress test files
+├── cypress.json          # Cypress configuration
+├── vite.config.ts        # Vite configuration
+├── tsconfig.json         # TypeScript configuration
+└── tailwind.config.js    # Tailwind CSS configuration
+```
+
+## Deployment
+
+1. Build your application for production
+   ```bash
+   npm run build
+   ```
+
+2. Deploy the contents of the `dist` folder to your web hosting service
+
+3. Make sure to configure your hosting service to handle SPA routing by redirecting all requests to `index.html`
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+ISC
+
+## Links
+
+- Repository: [https://github.com/MyKhode/ihub](https://github.com/MyKhode/ihub)
+- Issues: [https://github.com/MyKhode/ihub/issues](https://github.com/MyKhode/ihub/issues)
+- Supabase Documentation: [https://supabase.com/docs](https://supabase.com/docs)
+- Vue 3 Documentation: [https://vuejs.org/guide/introduction.html](https://vuejs.org/guide/introduction.html)
+- KHQR Documentation: [https://www.npmjs.com/package/ts-khqr](https://www.npmjs.com/package/ts-khqr)
