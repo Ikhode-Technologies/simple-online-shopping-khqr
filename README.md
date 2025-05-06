@@ -247,14 +247,14 @@ The KHQR (Khmer QR Code) is a standardized QR code payment system used in Cambod
 1. **Home Page**
    ![Home Page](https://github.com/user-attachments/assets/b652bd75-ff16-47c1-89e2-7a7f1b1b262b)
    - Users browse available products
-   - Can filter and search for specific items
-   - Add products to cart for purchase
+   - Select Product to see quick view model pop up
 
 2. **Product Quick View**
    ![Quick View Product](https://github.com/user-attachments/assets/fb8290f5-d160-4666-aeef-0276b7a6f9ad)
    - View product details
    - Select size, color, and quantity
-   - Add to cart directly from the quick view
+   - Click "Buy Now" button and it take a few operation to verify user have enough money and other condition verify
+   - Payment Successfully if pass all condition
 
 3. **Top Up Money**
    ![Top Up Money](https://github.com/user-attachments/assets/37e4101f-92f3-408b-a107-8bba08a82e2a)
@@ -264,14 +264,13 @@ The KHQR (Khmer QR Code) is a standardized QR code payment system used in Cambod
    - Funds are instantly credited to the user's account
 
 4. **Checkout Process**
-   - Review cart items
+   - Click Product Card to view Product Detail Options
    - Confirm order details
-   - Select delivery preferences
    - Pay using account balance (topped up via KHQR)
 
 5. **Order Confirmation**
    - Order is created in the database
-   - User receives confirmation
+   - User receives confirmation by view order history tab 
    - **Telegram Integration**: A notification is sent to the admin Telegram group
    ![Telegram Report](https://github.com/user-attachments/assets/6ad7d4fc-0107-461f-be15-228f9f6a99fc)
 
