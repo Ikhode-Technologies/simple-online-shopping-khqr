@@ -1,4 +1,4 @@
-# Simple-OS (Vuepabase)
+# Simple-OS KHQR
 
 A modern Vue 3 application with Supabase authentication integration, featuring email, password, and GitHub authentication flows. This project demonstrates how to effectively integrate Supabase with Vue 3, Pinia, Vue-router 4, TailwindCSS, and includes testing with Vitest and Cypress.
 
