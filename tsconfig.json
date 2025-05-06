@@ -21,9 +21,10 @@
   "include": [
     "vite.config.*",
     "env.d.ts",
+    "src",
     "src/**/*",
     "src/**/*.vue",
     "components.d.ts",
     "auto-imports.d.ts"
-  ]
+, "eventBus.js"  ]
 }

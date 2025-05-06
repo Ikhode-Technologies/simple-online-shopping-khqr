@@ -1,6 +1,6 @@
 <script lang="ts" setup>
-import EyeSlashed from "~icons/akar-icons/eye-slashed";
-import EyeOpen from "~icons/akar-icons/eye-open";
+// import EyeSlashed from "~icons/akar-icons/eye-slashed";
+// import EyeOpen from "~icons/akar-icons/eye-open";
 
 const showPassword = ref(false);
 
@@ -28,12 +28,12 @@ watch(
 );
 </script>
 <template>
-  <div class="mb-4 inline-flex items-stretch rounded focus-within:ring">
+  <div class="mb-4 inline-flex items-stretch rounded focus:ring">
     <VInput
       :modelValue="modelValue"
       @update:model-value="onInput"
       required
-      class="mb-0 rounded-r-none text-slate-900 focus:ring-0"
+      class="mb-0 w-full rounded-r-none text-slate-900 focus:ring-0"
       :name="name"
       :id="id"
       :placeholder="placeholder"
@@ -44,10 +44,10 @@ watch(
       type="button"
       :disabled="disabled"
       @click="showPassword = !showPassword"
-      class="rounded-r bg-white text-slate-500 border border-l-0 outline-none focus:text-teal-500"
+      class="rounded-r w-9 h-8.5 cursor-pointer justify-center items-center flex text-slate-100 border border-l-1 outline-none "
     >
-      <eye-slashed v-if="showPassword" class="h-8 w-8 p-1" />
-      <eye-open v-else class="h-8 w-8 p-1" />
+      <i-mdi-eye-off-outline v-if="showPassword" class="h-8 w-9 p-1 text-slate-50 hover:text-slate-200 duration-200" />
+      <i-mdi-eye-outline v-else class="h-8 w-9 p-1 text-slate-50 hover:text-slate-200 duration-200" />
     </button>
   </div>
 </template>
