@@ -334,32 +334,6 @@ npm run serve
 
 This will start the server defined in `server.js`
 
-## Project Structure
-
-```
-├── public/               # Static assets
-├── src/
-│   ├── assets/           # App assets (processed by Vite)
-│   ├── components/       # Vue components
-│   ├── composables/      # Vue composables
-│   ├── layouts/          # Page layouts
-│   ├── router/           # Vue Router configuration
-│   ├── stores/           # Pinia stores
-│   ├── services/         # API services
-│   │   └── supabase.ts   # Supabase client configuration
-│   ├── types/            # TypeScript type definitions
-│   ├── utils/            # Utility functions
-│   ├── views/            # Page components
-│   ├── App.vue           # Root component
-│   └── main.ts           # Application entry point
-├── .env                  # Environment variables
-├── .env.example          # Example environment variables
-├── cypress/              # Cypress test files
-├── cypress.json          # Cypress configuration
-├── vite.config.ts        # Vite configuration
-├── tsconfig.json         # TypeScript configuration
-└── tailwind.config.js    # Tailwind CSS configuration
-```
 
 ## Deployment
 
